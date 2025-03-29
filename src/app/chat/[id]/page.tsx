@@ -1,13 +1,20 @@
 import { ChatPage } from '@/routes/chat';
+import type { Metadata } from 'next';
 
-type Params = { params: { id: string } };
+type Props = {
+  params: Promise<{ id: string }>;
+};
 
-export async function generateMetadata({ params }: Params) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+
   return {
-    title: `Chat ${params.id}`,
+    title: `Chat ${id}`,
   };
 }
 
-export default function Page({ params }: Params) {
-  return <ChatPage id={params.id} />;
+export default async function Page({ params }: Props) {
+  const { id } = await params;
+
+  return <ChatPage id={id} />;
 }
