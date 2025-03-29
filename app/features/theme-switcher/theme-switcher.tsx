@@ -1,4 +1,4 @@
-import { Moon, Sun, Laptop } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import {
   Button,
@@ -8,6 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/shared/ui';
+import { themes } from './themes';
 
 export const ThemeSwitcher = () => {
   const { setTheme } = useTheme();
@@ -25,24 +26,15 @@ export const ThemeSwitcher = () => {
         <DropdownMenuContent align="end">
           <DropdownMenuItem disabled>Выберите тему</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem
-            className="cursor-pointer px-3"
-            onClick={() => setTheme('light')}
-          >
-            <Sun className="h-[2rem] w-[2rem]" /> <span>Светлая</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            className="cursor-pointer px-3"
-            onClick={() => setTheme('dark')}
-          >
-            <Moon className="h-[2rem] w-[2rem]" /> <span>Темная</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            className="cursor-pointer px-3"
-            onClick={() => setTheme('system')}
-          >
-            <Laptop className="h-[2rem] w-[2rem]" /> <span>Системная</span>
-          </DropdownMenuItem>
+          {themes.map(({ key, label, icon: Icon }) => (
+            <DropdownMenuItem
+              key={key}
+              className="cursor-pointer px-3"
+              onClick={() => setTheme(key)}
+            >
+              <Icon className="h-[2rem] w-[2rem]" /> <span>{label}</span>
+            </DropdownMenuItem>
+          ))}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
