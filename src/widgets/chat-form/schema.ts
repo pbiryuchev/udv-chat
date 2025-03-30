@@ -4,8 +4,8 @@ export const MessageSchema = z.object({
   message: z
     .string()
     .min(1, { message: 'Пожалуйста, введите сообщение.' })
-    .max(250, {
-      message: 'Сообщение не должно превышать 250 символов.',
+    .max(1000, {
+      message: 'Сообщение не должно превышать 1000 символов.',
     }),
 });
 
