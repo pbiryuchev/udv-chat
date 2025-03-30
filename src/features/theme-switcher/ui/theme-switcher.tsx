@@ -10,13 +10,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/shared/ui';
-import { themes } from './themes';
+import { themes } from '../themes';
 
 export const ThemeSwitcher = () => {
   const { setTheme } = useTheme();
 
   return (
-    <div className="absolute p-4 flex justify-end w-full">
+    <div className="py-4 max-w-250 mx-auto flex justify-end">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon" className="h-12 w-12">

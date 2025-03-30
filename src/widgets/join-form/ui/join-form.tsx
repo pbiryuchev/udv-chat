@@ -1,6 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import {
@@ -16,6 +17,7 @@ import {
 
 import { JoinFormSchema, type JoinFormType } from '../schema';
 import { JoinSuccessToast } from './success-toast';
+import { useUserActions } from '@/entities/user';
 
 const defaultValues: JoinFormType = {
   login: '',
@@ -23,12 +25,17 @@ const defaultValues: JoinFormType = {
 };
 
 export const JoinForm = () => {
+  const { signIn } = useUserActions();
+  const router = useRouter();
+
   const form = useForm<JoinFormType>({
     resolver: zodResolver(JoinFormSchema),
     defaultValues,
   });
 
   const onSubmit = (data: JoinFormType) => {
+    router.push(`/chat/${data.room}`);
+    signIn({ login: data.login });
     toast(<JoinSuccessToast data={data} />);
   };
 
@@ -61,7 +68,7 @@ export const JoinForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full h-12">
+        <Button type="submit" className="w-full h-12 text-lg">
           Войти
         </Button>
       </form>

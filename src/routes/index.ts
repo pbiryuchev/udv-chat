@@ -1,2 +1,2 @@
-export * from './chat';
-export * from './join';
+export * from './chat-page/ui/chat';
+export * from './join-page/ui/join';

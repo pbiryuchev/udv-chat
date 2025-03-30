@@ -1,4 +1,4 @@
-import { ChatPage } from '@/routes/chat';
+import { ChatPage } from '@/routes/chat-page/ui/chat';
 import type { Metadata } from 'next';
 
 type Props = {

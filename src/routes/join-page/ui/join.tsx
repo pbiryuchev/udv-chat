@@ -10,7 +10,7 @@ import { JoinForm } from '@/widgets/join-form';
 
 export const JoinPage = () => {
   return (
-    <main className="bg-background min-h-svh flex justify-center items-center">
+    <main className="bg-background min-h-[calc(100svh-80px)] flex justify-center items-center">
       <Card className="w-120">
         <CardHeader>
           <CardTitle className="text-3xl">Добро пожаловать!</CardTitle>
