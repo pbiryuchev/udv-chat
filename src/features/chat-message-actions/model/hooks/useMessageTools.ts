@@ -1,5 +1,6 @@
 import { Pencil, Trash2 } from 'lucide-react';
-import { IMessage, useChatActions } from '@/entities/chat-message';
+import { useChatActions } from '@/entities/chat-message';
+import { IMessage } from '@/shared/types';
 import { ChatTools } from '../types';
 
 export const useMessageTools = (

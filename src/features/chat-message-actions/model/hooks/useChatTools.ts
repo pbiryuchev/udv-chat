@@ -1,16 +1,23 @@
 import { Reply, PinOff, Pin, Copy } from 'lucide-react';
-import { IMessage } from '@/entities/chat-message';
+import { IMessage } from '@/shared/types';
 import { ChatTools } from '../types';
 import { useCallback } from 'react';
+import { useChatActions } from '@/entities/chat-message';
+import { usePinnedMessages } from '@/entities/pinned-message/model/hooks/usePinnedMessage';
 
 export const useChatTools = (
   chatId: string,
   message: IMessage
 ): ChatTools[] => {
+  const { pinMessage, unpinMessage } = useChatActions(chatId);
+  const { pinnedMessage } = usePinnedMessages(chatId);
+
   const handleCopy = useCallback(
     () => navigator.clipboard.writeText(message.content),
     [message.content]
   );
+
+  const isPinned = pinnedMessage?.id === message.id;
 
   return [
     {
@@ -21,9 +28,9 @@ export const useChatTools = (
     },
     {
       key: 'pin',
-      label: message.pinned ? 'Открепить' : 'Закрепить',
-      icon: message.pinned ? PinOff : Pin,
-      onClick: () => console.log('Закреп'),
+      label: isPinned ? 'Открепить' : 'Закрепить',
+      icon: isPinned ? PinOff : Pin,
+      onClick: isPinned ? unpinMessage : () => pinMessage(message),
     },
     {
       key: 'copy',

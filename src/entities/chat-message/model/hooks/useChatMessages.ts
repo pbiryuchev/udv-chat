@@ -1,11 +1,11 @@
-import { useState, useEffect, useMemo } from "react";
-import { useAtomValue } from "jotai";
-import { getChatAtom } from "../store";
+import { useState, useEffect, useMemo } from 'react';
+import { useAtomValue } from 'jotai';
+import { getChatAtom } from '../store';
 
 export const useChatMessages = (id: string) => {
   const [isLoading, setIsLoading] = useState(true);
-  const messagesAtom = useMemo(() => getChatAtom(id), [id])
-  const messages = useAtomValue(messagesAtom);
+  const messagesAtom = useMemo(() => getChatAtom(id), [id]);
+  const { messages, users } = useAtomValue(messagesAtom);
 
   useEffect(() => {
     if (messages !== undefined) {
@@ -15,6 +15,7 @@ export const useChatMessages = (id: string) => {
 
   return {
     messages,
+    users,
     isLoading,
   };
 };

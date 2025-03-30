@@ -6,5 +6,4 @@ export interface IMessage {
 
   images?: string[];
   quote?: IMessage;
-  pinned?: boolean;
 }

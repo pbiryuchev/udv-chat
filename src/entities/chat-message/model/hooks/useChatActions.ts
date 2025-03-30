@@ -1,22 +1,37 @@
 import { useSetAtom } from 'jotai';
 import { getChatAtom } from '../store';
-import { IMessage } from '../..';
+import { IMessage } from '@/shared/types';
 
 export const useChatActions = (id: string) => {
   const setMessages = useSetAtom(getChatAtom(id));
 
   const addMessage = (message: IMessage) => {
-    setMessages(prev => [...prev, message]);
+    setMessages((prev) => ({
+      ...prev,
+      messages: [...prev.messages, message],
+      users: [...new Set([...prev.users, message.author])],
+    }));
   };
 
   const deleteMessage = (messageId: string) => {
-    console.log(messageId)
-    setMessages(prev => prev.filter(m => m.id !== messageId));
+    setMessages((prev) => ({
+      ...prev,
+      messages: prev.messages.filter((m) => m.id !== messageId),
+      pin: prev.pin?.id === messageId ? null : prev.pin,
+    }));
   };
 
   const clearChat = () => {
-    setMessages([]);
+    setMessages((prev) => ({ ...prev, messages: [] }));
   };
 
-  return { addMessage, deleteMessage, clearChat };
+  const pinMessage = (message: IMessage) => {
+    setMessages((prev) => ({ ...prev, pin: message }));
+  };
+
+  const unpinMessage = () => {
+    setMessages((prev) => ({ ...prev, pin: null }));
+  };
+
+  return { addMessage, deleteMessage, clearChat, unpinMessage, pinMessage };
 };

@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { ContextMenu, ContextMenuTrigger } from '@/shared/ui';
 import { ChatMessageTools } from './chat-message-tools';
 import { cn } from '@/shared/lib/utils';
-import { IMessage } from '@/entities/chat-message';
+import { IMessage } from '@/shared/types';
 
 type ChatMessageActionsProps = {
   children: (handleOpen: () => void) => React.ReactNode;

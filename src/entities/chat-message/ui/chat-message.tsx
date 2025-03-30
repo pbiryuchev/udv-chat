@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import { cn } from '@/shared/lib/utils';
 import { UserAvatar } from '@/shared/ui';
-import { IMessage } from '../model/message.interface';
+import { IMessage } from '@/shared/types';
 import { MessageToolsButton } from './message-tools-button';
 import { Message } from './message';
 

@@ -1,6 +1,6 @@
+import { formatTime } from '@/shared/lib/dayjs';
 import { cn } from '@/shared/lib/utils';
-import dayjs from 'dayjs';
-import { IMessage } from '../model/message.interface';
+import { IMessage } from '@/shared/types';
 
 type MessageProps = {
   message: IMessage;
@@ -21,7 +21,7 @@ export const Message = ({ message, showAuthor, className }: MessageProps) => (
 
     <p className="text-foreground text-sm pt-1">{message.content}</p>
     <p className="text-muted-foreground text-xs text-end">
-      {dayjs(message.date).format('HH:mm')}
+      {formatTime(message.date)}
     </p>
   </div>
 );

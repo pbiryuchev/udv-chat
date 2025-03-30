@@ -1,4 +1,4 @@
-import { IMessage } from '@/entities/chat-message';
+import { IMessage } from '@/shared/types';
 import {
   ContextMenuContent,
   ContextMenuItem,
