@@ -9,11 +9,13 @@ import { IMessage } from '@/entities/chat-message';
 type ChatMessageActionsProps = {
   children: (handleOpen: () => void) => React.ReactNode;
   message: IMessage;
+  chatId: string;
 };
 
 export const ChatMessageActions = ({
   children,
   message,
+  chatId
 }: ChatMessageActionsProps) => {
   const [isOpen, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -41,7 +43,7 @@ export const ChatMessageActions = ({
         {children(handleOpen)}
       </ContextMenuTrigger>
 
-      <ChatMessageTools message={message} />
+      <ChatMessageTools chatId={chatId} message={message} />
     </ContextMenu>
   );
 };

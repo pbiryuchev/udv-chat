@@ -4,12 +4,29 @@ import {
   ContextMenuItem,
   ContextMenuSeparator,
 } from '@/shared/ui';
-import { getMessageTools, getTools } from '../utils/tools';
+import { useUserStore } from '@/entities/user';
+import { useMessageTools } from '../model/hooks/useMessageTools';
+import { useChatTools } from '../model/hooks/useChatTools';
 
-export const ChatMessageTools = ({ message }: { message: IMessage }) => {
+type ChatMessateToolsProps = {
+  message: IMessage;
+  chatId: string;
+};
+
+export const ChatMessageTools = ({
+  chatId,
+  message,
+}: ChatMessateToolsProps) => {
+  const tools = useChatTools(chatId, message);
+  const messageTools = useMessageTools(chatId, message);
+
+  const user = useUserStore();
+
+  const isOwner = user?.login === message.author;
+
   return (
     <ContextMenuContent>
-      {getTools(message).map(({ key, label, icon: Icon, onClick }) => (
+      {tools.map(({ key, label, icon: Icon, onClick }) => (
         <ContextMenuItem
           key={key}
           className="cursor-pointer px-3"
@@ -18,18 +35,20 @@ export const ChatMessageTools = ({ message }: { message: IMessage }) => {
           <Icon className="h-[2rem] w-[2rem]" /> <span>{label}</span>
         </ContextMenuItem>
       ))}
-      <ContextMenuSeparator />
-      {getMessageTools(message).map(
-        ({ key, label, icon: Icon, danger, onClick }) => (
-          <ContextMenuItem
-            key={key}
-            variant={danger ? 'destructive' : 'default'}
-            className="cursor-pointer px-3"
-            onClick={onClick}
-          >
-            <Icon className="h-[2rem] w-[2rem]" /> <span>{label}</span>
-          </ContextMenuItem>
-        )
+      {isOwner && (
+        <>
+          <ContextMenuSeparator />
+          {messageTools.map(({ key, label, icon: Icon, danger, onClick }) => (
+            <ContextMenuItem
+              key={key}
+              variant={danger ? 'destructive' : 'default'}
+              className="cursor-pointer px-3"
+              onClick={onClick}
+            >
+              <Icon className="h-[2rem] w-[2rem]" /> <span>{label}</span>
+            </ContextMenuItem>
+          ))}
+        </>
       )}
     </ContextMenuContent>
   );

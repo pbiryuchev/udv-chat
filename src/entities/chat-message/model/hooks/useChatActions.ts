@@ -10,6 +10,7 @@ export const useChatActions = (id: string) => {
   };
 
   const deleteMessage = (messageId: string) => {
+    console.log(messageId)
     setMessages(prev => prev.filter(m => m.id !== messageId));
   };
 

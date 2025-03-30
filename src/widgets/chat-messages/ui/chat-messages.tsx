@@ -20,7 +20,11 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
         <ChatSkeleton />
       ) : (
         messages.map((message) => (
-          <ChatMessageActions message={message} key={message.id}>
+          <ChatMessageActions
+            chatId={chatId}
+            message={message}
+            key={message.id}
+          >
             {(open) => (
               <ChatMessage
                 onToolsOpen={open}
