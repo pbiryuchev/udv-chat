@@ -1,35 +1,44 @@
+// components/chat-message.tsx
+'use client';
+
+import { useState } from 'react';
+import { cn } from '@/shared/lib/utils';
 import { UserAvatar } from '@/shared/ui';
 import { IMessage } from '../model/message.interface';
-import { cn } from '@/shared/lib/utils';
-import dayjs from 'dayjs';
+import { MessageToolsButton } from './message-tools-button';
+import { Message } from './message';
 
 type ChatMessageProps = {
   message: IMessage;
   isOwner: boolean;
+  onToolsOpen?: () => void;
 };
 
-const getTimeFormat = (date: string) => dayjs(date).format('HH:mm');
+export const ChatMessage = ({
+  message,
+  isOwner,
+  onToolsOpen,
+}: ChatMessageProps) => {
+  const [isHovered, setIsHovered] = useState(false);
 
-export const ChatMessage = ({ message, isOwner }: ChatMessageProps) => {
   return (
-    <div className="hover:bg-message-hover px-2 rounded-sm">
-      <div
-        className={cn(
-          'flex gap-3 py-2',
-          isOwner && 'self-end flex-row-reverse'
-        )}
-      >
-        <UserAvatar name={message.author} size="sm" />
-        <div className="bg-accent px-3 py-1 rounded-md min-w-[160px] max-w-[320px] text-clip border-[1px]">
-          {!isOwner && (
-            <p className="text-muted-foreground text-sm">{message.author}</p>
-          )}
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={cn('flex gap-3 py-2', isOwner && 'self-end flex-row-reverse')}
+    >
+      <UserAvatar name={message.author} size="sm" />
 
-          <p className="text-foreground text-sm pt-1">{message.content}</p>
-          <p className="text-muted-foreground text-xs text-end">
-            {getTimeFormat(message.date)}
-          </p>
-        </div>
+      <div className="relative">
+        <Message message={message} showAuthor={!isOwner} />
+
+        {onToolsOpen && (
+          <MessageToolsButton
+            position={isOwner ? 'left' : 'right'}
+            isVisible={isHovered}
+            onClick={onToolsOpen}
+          />
+        )}
       </div>
     </div>
   );

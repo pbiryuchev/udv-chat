@@ -4,6 +4,7 @@ import { ChatMessage, useChatMessages } from '@/entities/chat-message';
 import { ChatSkeleton } from './messages-skeleton';
 import { useUserStore } from '@/entities/user';
 import { useChatScrolled } from '../hooks/useChatScrolled';
+import { ChatMessageActions } from '@/features/chat-message-actions';
 
 export const ChatMessages = ({ chatId }: { chatId: string }) => {
   const { messages, isLoading } = useChatMessages(chatId);
@@ -19,11 +20,15 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
         <ChatSkeleton />
       ) : (
         messages.map((message) => (
-          <ChatMessage
-            isOwner={message.author === user?.login}
-            key={message.id}
-            message={message}
-          />
+          <ChatMessageActions message={message} key={message.id}>
+            {(open) => (
+              <ChatMessage
+                onToolsOpen={open}
+                isOwner={message.author === user?.login}
+                message={message}
+              />
+            )}
+          </ChatMessageActions>
         ))
       )}
     </div>

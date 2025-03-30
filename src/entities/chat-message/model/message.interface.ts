@@ -3,4 +3,8 @@ export interface IMessage {
   author: string;
   content: string;
   date: string;
+
+  images?: string[];
+  quote?: IMessage;
+  pinned?: boolean;
 }

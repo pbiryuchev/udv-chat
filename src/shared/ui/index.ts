@@ -14,3 +14,4 @@ export * from './sidebar';
 export * from './resizable';
 export * from './textarea';
 export * from './user-avatar';
+export * from './context-menu';
