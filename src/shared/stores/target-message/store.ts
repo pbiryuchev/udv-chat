@@ -18,7 +18,7 @@ export const useScrollTargetActions = (messageId?: string) => {
     }));
   }, 500);
 
-  return { handleScroll };
+  return { handleScroll, setScrollTarget };
 };
 
 export const useScrollTargetMessage = () => useAtomValue(scrollToMessageAtom);

@@ -1,4 +1,7 @@
-import { useScrollTargetMessage } from '@/shared/stores';
+import {
+  useScrollTargetActions,
+  useScrollTargetMessage,
+} from '@/shared/stores';
 import { IMessage } from '@/shared/types';
 import { useRef, useEffect } from 'react';
 
@@ -12,6 +15,7 @@ export const useChatScrolled = ({
   isLoading,
 }: UseChatScrolledProps) => {
   const scrollTarget = useScrollTargetMessage();
+  const { setScrollTarget } = useScrollTargetActions();
   const containerRef = useRef<HTMLDivElement>(null);
   const animateTimerRef = useRef<NodeJS.Timeout>(null);
   const prevContainerRef = useRef<HTMLElement>(null);
@@ -77,13 +81,17 @@ export const useChatScrolled = ({
     const timer = setTimeout(scrollToMessage, 0);
 
     return () => {
+      if (scrollTarget.messageId) {
+        setScrollTarget({ messageId: null, trigger: 0 });
+      };
+
       clearTimeout(timer);
       if (animateTimerRef.current) {
         prevContainerRef.current?.classList.remove('bg-message-hover');
         clearTimeout(animateTimerRef.current);
       }
     };
-  }, [scrollTarget.trigger, scrollTarget.messageId]);
+  }, [scrollTarget.trigger, scrollTarget.messageId, setScrollTarget]);
 
   return { containerRef };
 };
