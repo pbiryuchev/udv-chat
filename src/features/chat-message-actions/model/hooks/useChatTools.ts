@@ -4,11 +4,13 @@ import { ChatTools } from '../types';
 import { useCallback } from 'react';
 import { useChatActions } from '@/entities/chat-message';
 import { usePinnedMessages } from '@/entities/pinned-message/model/hooks/usePinnedMessage';
+import { useQuoteActions } from '@/entities/quote-message';
 
 export const useChatTools = (
   chatId: string,
   message: IMessage
 ): ChatTools[] => {
+  const { setQuoteMessage } = useQuoteActions();
   const { pinMessage, unpinMessage } = useChatActions(chatId);
   const { pinnedMessage } = usePinnedMessages(chatId);
 
@@ -24,7 +26,7 @@ export const useChatTools = (
       key: 'send',
       label: 'Ответить',
       icon: Reply,
-      onClick: () => console.log('Ответить'),
+      onClick: () => setQuoteMessage(message),
     },
     {
       key: 'pin',

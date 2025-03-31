@@ -15,7 +15,7 @@ type ChatMessageActionsProps = {
 export const ChatMessageActions = ({
   children,
   message,
-  chatId
+  chatId,
 }: ChatMessageActionsProps) => {
   const [isOpen, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);

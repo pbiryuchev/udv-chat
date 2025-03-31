@@ -17,12 +17,20 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { MessageType, MessageSchema } from '../schema';
 import { useChatActions } from '@/entities/chat-message';
+import {
+  QuotePreview,
+  useQuoteActions,
+  useQuoteMessage,
+} from '@/entities/quote-message';
 
 const defaultValues = {
   message: '',
 };
 
 export const ChatForm = ({ chatId }: { chatId: string }) => {
+  const quote = useQuoteMessage();
+  const { resetQuoteMessage } = useQuoteActions();
+
   const router = useRouter();
   const { addMessage } = useChatActions(chatId);
   const user = useUserStore();
@@ -52,9 +60,11 @@ export const ChatForm = ({ chatId }: { chatId: string }) => {
       content: data.message,
       author: user.login,
       date: new Date().toISOString(),
+      quote: quote ?? undefined,
     });
 
     form.reset(defaultValues);
+    resetQuoteMessage();
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -78,23 +88,26 @@ export const ChatForm = ({ chatId }: { chatId: string }) => {
             <SmilePlus />
           </Button>
         </div>
-        <FormField
-          control={form.control}
-          name="message"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormMessage />
-              <FormControl>
-                <Textarea
-                  placeholder="Сообщение"
-                  className="max-h-30 self-start resize-none"
-                  onKeyDown={handleKeyDown}
-                  {...field}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <div className="w-full">
+          {quote && <QuotePreview quote={quote} />}
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormMessage />
+                <FormControl>
+                  <Textarea
+                    placeholder="Сообщение"
+                    className="max-h-30 self-start resize-none"
+                    onKeyDown={handleKeyDown}
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        </div>
 
         <Button
           type="submit"

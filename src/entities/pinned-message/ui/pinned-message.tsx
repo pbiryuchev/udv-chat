@@ -1,25 +1,21 @@
 'use client';
 
+import { Pin, X } from 'lucide-react';
 import { Button, Card } from '@/shared/ui';
 import { usePinnedMessages } from '../model/hooks/usePinnedMessage';
 import { formatTime } from '@/shared/lib/dayjs';
-import { Pin, X } from 'lucide-react';
 import { useChatActions } from '@/entities/chat-message';
-import { usePinScroll } from '../model/hooks/usePinScroll';
+import { TargetMessageWrapper } from '@/shared/stores';
 
 export const PinnedMessage = ({ chatId }: { chatId: string }) => {
   const { unpinMessage } = useChatActions(chatId);
   const { pinnedMessage } = usePinnedMessages(chatId);
-  const { handleClick } = usePinScroll(pinnedMessage?.id);
 
   if (!pinnedMessage) return null;
 
   return (
     <Card className="p-1 rounded-md mt-2 flex flex-row gap-2 items-center">
-      <div
-        onClick={handleClick}
-        className="w-full cursor-pointer flex flex-row gap-2 hover:bg-muted/50 duration-150 rounded-md p-1"
-      >
+      <TargetMessageWrapper id={pinnedMessage.id}>
         <div className="size-10 flex justify-center items-center rounded-md">
           <Pin size={20} className="rotate-30" />
         </div>
@@ -36,7 +32,7 @@ export const PinnedMessage = ({ chatId }: { chatId: string }) => {
             {pinnedMessage.content}
           </p>
         </div>
-      </div>
+      </TargetMessageWrapper>
       <Button
         onClick={unpinMessage}
         variant="outline"

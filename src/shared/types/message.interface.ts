@@ -1,3 +1,5 @@
+import { TQuote } from './quote.type';
+
 export interface IMessage {
   id: string;
   author: string;
@@ -5,5 +7,5 @@ export interface IMessage {
   date: string;
 
   images?: string[];
-  quote?: IMessage;
+  quote?: TQuote;
 }
