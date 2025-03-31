@@ -67,6 +67,9 @@ export const useChatScrolled = ({
 
         animateTimerRef.current = setTimeout(() => {
           containerElement.classList.remove('bg-message-hover');
+          if (scrollTarget.messageId) {
+            setScrollTarget({ messageId: null, trigger: 0 });
+          }
         }, 3500);
       }
 
@@ -81,10 +84,6 @@ export const useChatScrolled = ({
     const timer = setTimeout(scrollToMessage, 0);
 
     return () => {
-      if (scrollTarget.messageId) {
-        setScrollTarget({ messageId: null, trigger: 0 });
-      };
-
       clearTimeout(timer);
       if (animateTimerRef.current) {
         prevContainerRef.current?.classList.remove('bg-message-hover');
@@ -92,6 +91,15 @@ export const useChatScrolled = ({
       }
     };
   }, [scrollTarget.trigger, scrollTarget.messageId, setScrollTarget]);
+
+  useEffect(() => {
+    return () => {
+      if (scrollTarget.messageId) {
+        setScrollTarget({ messageId: null, trigger: 0 });
+      }
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setScrollTarget]);
 
   return { containerRef };
 };
