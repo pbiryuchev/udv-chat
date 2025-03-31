@@ -15,7 +15,7 @@ export const QuoteMessage = ({
     <TargetMessageWrapper
       id={quote.id}
       className={cn({
-        'p-1 px-1.5 hover:bg-card/40 rounded-sm': type === 'message',
+        'p-1 px-2 hover:bg-card/40 rounded-sm': type === 'message',
       })}
     >
       <div className="w-[7px]">

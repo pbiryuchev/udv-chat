@@ -20,11 +20,13 @@ export const useChatScrolled = ({
   useEffect(() => {
     if (!containerRef.current) return;
 
-    if (!isLoading && prevMessagesLength.current === 0) {
-      containerRef.current.scrollTo({
-        top: containerRef.current.scrollHeight,
-      });
-    }
+    containerRef.current.scrollTo({
+      top: containerRef.current.scrollHeight,
+    });
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
 
     const isNewMessage = messages.length > prevMessagesLength.current;
 
@@ -51,9 +53,8 @@ export const useChatScrolled = ({
         `[data-message-id="${scrollTarget.messageId}"]`
       );
 
-      prevContainerRef.current = targetElement?.closest(
-        `[data-slot="context-menu-trigger"]`
-      ) ?? null;
+      prevContainerRef.current =
+        targetElement?.closest(`[data-slot="context-menu-trigger"]`) ?? null;
 
       const containerElement = prevContainerRef.current;
 
