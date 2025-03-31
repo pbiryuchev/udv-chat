@@ -11,7 +11,7 @@ type MessageProps = {
 export const Message = ({ message, showAuthor, className }: MessageProps) => (
   <div
     className={cn(
-      'relative bg-accent px-3 py-1 rounded-md min-w-[160px] max-w-[320px] text-clip border-[1px]',
+      'relative bg-accent px-3 py-1 rounded-md min-w-[160px] max-w-[320px] text-clip break-all border-[1px]',
       className
     )}
   >

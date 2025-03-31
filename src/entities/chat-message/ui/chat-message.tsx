@@ -1,4 +1,3 @@
-// components/chat-message.tsx
 'use client';
 
 import { useState } from 'react';
