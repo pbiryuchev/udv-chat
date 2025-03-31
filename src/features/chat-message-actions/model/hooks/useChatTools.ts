@@ -26,7 +26,12 @@ export const useChatTools = (
       key: 'send',
       label: 'Ответить',
       icon: Reply,
-      onClick: () => setQuoteMessage(message),
+      onClick: () =>
+        setQuoteMessage({
+          id: message.id,
+          content: message.content,
+          author: message.author,
+        }),
     },
     {
       key: 'pin',
