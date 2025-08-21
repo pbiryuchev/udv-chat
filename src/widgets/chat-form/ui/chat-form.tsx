@@ -56,6 +56,7 @@ export const ChatForm = ({ chatId }: { chatId: string }) => {
     }
 
     addMessage({
+      // TODO избавиться от crypto.randomUUID
       id: crypto.randomUUID(),
       content: data.message,
       author: user.login,

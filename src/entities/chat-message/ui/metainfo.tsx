@@ -14,14 +14,14 @@ type MetaInfoProps = {
   message: IMessage;
 };
 
+const extractUrl = (text: string) => {
+  const urlRegex = /https?:\/\/[^\s]+/g;
+  return text.match(urlRegex)?.[0];
+};
+
 export const MetaInfo = ({ message }: MetaInfoProps) => {
   const [photoError, setPhotoError] = useState(false);
   const [linkMeta, setLinkMeta] = useState<LinkMeta | null>(null);
-
-  const extractUrl = (text: string) => {
-    const urlRegex = /https?:\/\/[^\s]+/g;
-    return text.match(urlRegex)?.[0];
-  };
 
   useEffect(() => {
     const url = extractUrl(message.content);

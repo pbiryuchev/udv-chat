@@ -14,6 +14,7 @@ export const useMessageTools = (
       key: 'edit',
       label: 'Редактировать',
       icon: Pencil,
+      // TODO
       onClick: () => console.log(`Редактировать ${message.id}`),
     },
     {

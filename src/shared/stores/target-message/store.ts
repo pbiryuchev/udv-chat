@@ -1,5 +1,5 @@
 import { atom, useAtomValue, useSetAtom } from 'jotai';
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 
 export const scrollToMessageAtom = atom<{
   messageId: string | null;
