@@ -12,30 +12,29 @@ export const ChatMessages = ({ chatId }: { chatId: string }) => {
   const user = useUserStore();
 
   return (
-    <div
-      ref={containerRef}
-      className="flex-1 overflow-y-auto py-5 flex flex-col"
-    >
+    <div ref={containerRef} className="overflow-y-auto flex-1">
       {isLoading ? (
         <ChatSkeleton />
       ) : (
-        messages.map((message) => (
-          <ChatMessageActions
-            chatId={chatId}
-            message={message}
-            key={message.id}
-          >
-            {(open) => (
-              <div data-message-id={message.id}>
-                <ChatMessage
-                  onToolsOpen={open}
-                  isOwner={message.author === user?.login}
-                  message={message}
-                />
-              </div>
-            )}
-          </ChatMessageActions>
-        ))
+        <div className="flex flex-col py-5">
+          {messages.map((message) => (
+            <ChatMessageActions
+              chatId={chatId}
+              message={message}
+              key={message.id}
+            >
+              {(open) => (
+                <div data-message-id={message.id}>
+                  <ChatMessage
+                    onToolsOpen={open}
+                    isOwner={message.author === user?.login}
+                    message={message}
+                  />
+                </div>
+              )}
+            </ChatMessageActions>
+          ))}
+        </div>
       )}
     </div>
   );

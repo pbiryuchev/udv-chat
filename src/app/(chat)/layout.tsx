@@ -1,6 +1,6 @@
 import { ThemeSwitcher } from '@/features/theme-switcher';
 
-export default function ShellLayout({
+export default function ChatLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

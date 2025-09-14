@@ -25,7 +25,7 @@ export const ChatHeader = ({ chatId }: { chatId: string }) => {
       </CardAction>
       <div>
         <CardTitle className="flex flex-col gap-1">
-          <span className="text-2xl font-bold">Комната: {chatId}</span>
+          <span className="text-xl font-bold line-clamp-1">{chatId}</span>
         </CardTitle>
         <div className="h-6">
           {isLoading ? (
@@ -40,7 +40,7 @@ export const ChatHeader = ({ chatId }: { chatId: string }) => {
                     </p>
                   </CardDescription>
                 </TooltipTrigger>
-                <TooltipContent>
+                <TooltipContent side="bottom">
                   <p className="font-bold">Участники</p>
                   <ul>
                     {users.map((user) => (
