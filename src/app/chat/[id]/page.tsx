@@ -1,4 +1,4 @@
-import { ChatPage } from '@/routes/chat-page/ui/chat';
+import { ChatPageDynamic } from '@/routes/chat-page';
 import type { Metadata } from 'next';
 
 type Props = {
@@ -16,5 +16,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { id } = await params;
 
-  return <ChatPage id={id} />;
+  return <ChatPageDynamic id={id} />;
 }

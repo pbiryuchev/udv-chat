@@ -1,5 +1,5 @@
-import { JoinPage } from '@/routes/join-page/ui/join';
+import { JoinPageDynamic } from '@/routes/join-page';
 
 export default function Page() {
-  return <JoinPage />;
+  return <JoinPageDynamic />;
 }

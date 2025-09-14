@@ -1,6 +1,6 @@
-import { Card } from "@/shared/ui";
-import { ChatContent } from "./chat-content";
-import { ChatHeader } from "./chat-header";
+import { Card } from '@/shared/ui';
+import { ChatContent } from './chat-content';
+import { ChatHeader } from './chat-header';
 
 export const ChatPage = ({ id }: { id: string }) => {
   // TODO ChatID сделать через useContext
