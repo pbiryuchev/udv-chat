@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 import { Roboto } from 'next/font/google';
-import { ThemeSwitcher } from '@/features/theme-switcher';
 import { Toaster } from '@/shared/ui';
 import './globals.css';
+
+export const dynamic = 'force-dynamic';
 
 const roboto = Roboto({
   variable: '--font-roboto',
@@ -27,7 +28,6 @@ export default function RootLayout({
           storageKey="ui-theme"
           defaultTheme="dark"
         >
-          <ThemeSwitcher />
           {children}
           <Toaster />
         </ThemeProvider>

@@ -1,3 +1,5 @@
+import { NProgress } from '@/shared/lib/nprogress';
+
 export default function LoadingPage() {
-  return <div>Loading...</div>;
+  return <NProgress />;
 }

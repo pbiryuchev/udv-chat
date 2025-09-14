@@ -47,6 +47,10 @@ body {
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.705 0.015 286.067);
+
+  --nprogress-bar: oklch(74.6% 0.16 232.661);
+  --nprogress-bar-accent: oklch(58.8% 0.158 241.966);
+  --nprogress-bar-spinner: oklch(82.8% 0.111 230.318);
 }
 
 .dark {
@@ -83,6 +87,10 @@ body {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.552 0.016 285.938);
+
+  --nprogress-bar: oklch(58.8% 0.158 241.966);
+  --nprogress-bar-accent: oklch(44.3% 0.11 240.79);
+  --nprogress-bar-spinner: oklch(58.8% 0.158 241.966);
 }
 
 @theme inline {
